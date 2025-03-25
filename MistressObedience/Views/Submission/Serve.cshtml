@@ -2,5 +2,14 @@
 @model MistressObedience.Views.Submission.ServeModel
 @{
 	<h1>You exist only to serve Mistress Celeste</h1>
-	<p1>Obey, learn, and submit.</p1>
+	<form method="post">
+		<label for="servantName">Enter your name:</label>
+		<input type="text" id="servantName" name="servantName" required>
+		<button type="submit">I am ready to serve</button>
+	</form>
+	
+	@if (ViewBag.Message != null)
+	{
+		<p>@ViewBag.Message</p>
+	}
 }
