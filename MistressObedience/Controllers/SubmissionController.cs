@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MistressObedience.Models;
 
 namespace MistressObedience.Controllers
 {
@@ -11,10 +12,14 @@ namespace MistressObedience.Controllers
         }
 
         [HttpPost]
-        public IActionResult Serve(string servantName)
+        public IActionResult Serve(ServantModel model)
         {
-            ViewBag.message = $"{servantName}, you belong to Mistress Celeste.";
-            return View();
+            if(!ModelState.IsValid) {
+                return View(model);
+            }
+
+            ViewBag.message = $"{model.Name}, aged {model.Age}, with a devotion level of {model.DevotionLevel}, you are now bound to Mistress Celeste.";
+            return View(model);
         }
     }
 }

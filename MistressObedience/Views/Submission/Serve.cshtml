@@ -1,15 +1,31 @@
-﻿@page
-@model MistressObedience.Views.Submission.ServeModel
-@{
-	<h1>You exist only to serve Mistress Celeste</h1>
-	<form method="post">
-		<label for="servantName">Enter your name:</label>
-		<input type="text" id="servantName" name="servantName" required>
-		<button type="submit">I am ready to serve</button>
-	</form>
+﻿@model MistressObedience.Models.ServantModel
+<h1>You exist only to serve Mistress Celeste</h1>
+
+<form method="post">
+
+	<label for="Name">Enter your name:</label>
+	<input type="text" asp-for="Name" />
+	<span asp-validation-for="Name" style="color: red;"></span>
+	<br>
+
+	<label for="Age">Enter your age:</label>
+	<input type="number" asp-for="Age" />
+	<span asp-validation-for="Age" style="color: red;"></span>
+	<br>
+
+	<label for="DevotionLevel">Your devotion (1-10):</label>
+	<input type="number" asp-for="DevotionLevel" />
+	<span asp-validation-for="DevotionLevel" style="color: red;"></span>
+	<br>
+
+	<button type="submit">I am ready to serve</button>
+</form>
 	
-	@if (ViewBag.Message != null)
-	{
-		<p>@ViewBag.Message</p>
-	}
+@if (ViewBag.Message != null)
+{
+	<p>@ViewBag.Message</p>
+}
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
 }
