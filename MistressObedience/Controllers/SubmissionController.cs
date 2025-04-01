@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MistressObedience.Models;
 using MistressObedience.Services;
+using MistressObedience.Data;
 
 namespace MistressObedience.Controllers
 {
     public class SubmissionController : Controller
     {
-        private readonly IDevotionService _devotionService;
-
-        public SubmissionController(IDevotionService devotionService)
+        public readonly ServantContext _context;
+        
+        public SubmissionController(ServantContext context)
         {
-            _devotionService = devotionService;
+            _context = context;
         }
-
 
         [HttpGet]
         public IActionResult Serve()
@@ -23,11 +23,13 @@ namespace MistressObedience.Controllers
         [HttpPost]
         public IActionResult Serve(ServantModel model)
         {
-            if(!ModelState.IsValid) {
+            if(!ModelState.IsValid)
                 return View(model);
-            }
 
-            ViewBag.message = _devotionService.GetDevotionMessage(model.DevotionLevel);
+            _context.Servants.Add(model);
+            _context.SaveChanges();
+
+            ViewBag.message = $"{model.Name}, your devotion is now recorded permanently.";
             return View(model); 
         }
     }

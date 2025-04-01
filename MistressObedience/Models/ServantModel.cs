@@ -4,6 +4,9 @@ namespace MistressObedience.Models
 {
     public class ServantModel
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "You must provide your name, servant.")]
         public string Name { get; set; }
 

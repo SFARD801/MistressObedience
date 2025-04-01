@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using MistressObedience.Data;
+using MistressObedience.Models;
 using MistressObedience.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IDevotionService, DevotionService>();
+builder.Services.AddDbContext<ServantContext>(options =>
+    options.UseSqlite("Data Source=servants.db"));
 
 var app = builder.Build();
 
